@@ -2,9 +2,64 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>商城首页</title>
 </head>
-<body>
-<font size="30">This is index.html in Application/Home/View/Index/.</font>
+<body class="g-bg" style="height:100%">
+<include file="Common:head"/>
+<div id="a-wrap" style="height:100%">
+<!-- 图片轮播 -->
+<div id="banner_tabs" class="flexslider">
+	<ul class="slides">
+		<li>
+			<a title="" target="_blank" href="">
+				<img alt="" style="background: url(__PUBLIC__/images/banner1.jpg) no-repeat center;" src="__PUBLIC__/images/alpha.png">
+			</a>
+		</li>
+		<li>
+			<a title="" href="">
+				<img alt="" style="background: url(__PUBLIC__/images/banner2.jpg) no-repeat center;" src="__PUBLIC__/images/alpha.png">
+			</a>
+		</li>
+		<li>
+			<a title="" href="">
+				<img alt="" style="background: url(__PUBLIC__/images/banner3.jpg) no-repeat center;" src="__PUBLIC__/images/alpha.png">
+			</a>
+		</li>
+	</ul>
+	<ul class="flex-direction-nav">
+		<li><a class="flex-prev" href="javascript:;">Previous</a></li>
+		<li><a class="flex-next" href="javascript:;">Next</a></li>
+	</ul>
+	<ol id="bannerCtrl" class="flex-control-nav flex-control-paging">
+		<li><a>1</a></li>
+		<li><a>2</a></li>
+		<li><a>2</a></li>
+	</ol>
+</div>
+<!--轮播JS-->
+<script src="__PUBLIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__PUBLIC__/js/slider.js"></script>
+<script type="text/javascript">
+$(function() {
+	var bannerSlider = new Slider($('#banner_tabs'), {
+		time: 5000,
+		delay: 400,
+		event: 'hover',
+		auto: true,
+		mode: 'fade',
+		controller: $('#bannerCtrl'),
+		activeControllerCls: 'active'
+	});
+	$('#banner_tabs .flex-prev').click(function() {
+		bannerSlider.prev()
+	});
+	$('#banner_tabs .flex-next').click(function() {
+		bannerSlider.next()
+	});
+})
+</script>
+<!-- 页脚 -->
+<include file="Common:foot"/>
+</div>
 </body>
 </html>
