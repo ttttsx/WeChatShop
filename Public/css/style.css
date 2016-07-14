@@ -2165,7 +2165,7 @@ body {
   height: 192px;
   margin: -30px auto 0;
   border-radius: 200px;
-  background: url(../images/large_logo.png);
+  background: url(../images/banner1.jpg);         /*//////////登录界面logo*/
   -webkit-background-size: cover;
   background-size: cover;
 }
@@ -3428,7 +3428,7 @@ body {
 	margin: 0px auto 20px;
 	position: relative;
 	width: 100%;
-	height: 482px;
+	height: 282px;
 	overflow: hidden;
 	zoom: 1;
 }
@@ -3512,6 +3512,6 @@ body {
 
 .flexslider .slides a img {
 	width: 100%;
-	height: 482px;
+	height: 282px;
 	display: block;
 }
