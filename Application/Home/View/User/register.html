@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-transform "/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta content="telephone=no,email=no" name="format-detection">
+<title>新用户注册</title>
+</head>
+<body class="g-bg" style="height: 100%">
+<include file="Common:head" />
+	<div id="a-wrap" style="height: 100%">
+		<div class="altmsg" name="off">
+			<h4>注册成功</h4>
+		</div>
+		<section id="section" class="section"
+			style="position: relative; height: 100%; min-height: 470px">
+			<article id="article" class="article">
+				<div class="login-regist">
+					<div class="lr-header"></div>
+					<div class="lr-logo"></div>
+					<div class="dialog" style="display: none">
+						<div class="box tc" id="dialog_box_tc"></div>
+					</div>
+					<div class="tips-info">
+						已经有账号了? 点此<a href="{:U('User/login')}">登陆</a>
+					</div>
+					<div class="form-list p">
+						<ul>
+							<li class="fl-item"><b class="name"><input type="number"
+									id="mobile" class="input-style" placeholder="请输入用户名" /></b></li>
+							<li class="fl-item"><b class="name"><input
+									type="password" id="password" class="input-style"
+									placeholder="设置新密码（6-18位数字或字母）" /></b></li>
+							<li class="fl-item"><b class="name"><input
+									type="password" id="confirmPassword" class="input-style"
+									placeholder="再次输入密码" /></b></li>
+						</ul>
+					</div>
+					<div class="agree tc">
+						<input type="checkbox" id="agree" name="agree" checked="checked" />
+						<label for="agree"><a href="">同意使用协议<a></label>
+					</div>
+					<a href="javascript:;" id="btnRegister" class="login">注册</a> <br>
+				</div>
+				<div class="nav tc a-txt">
+					<br> <br>
+				</div>
+			</article>
+		</section>
+		<script src=""></script>
+	</div>
+</body>
+</html>
