@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/class.css">
+<title>商品分类</title>
+</head>
+<script type="text/javascript">
+	function gopage(n) {
+		var tag = document.getElementById("rootList").getElementsByTagName("li");
+		var taglength = tag.length;
+
+		for (i = 1; i <= taglength; i++) {
+			document.getElementById("m" + i).className = "";
+			document.getElementById("c" + i).style.display = 'none';
+		}
+		document.getElementById("m" + n).className = "cur";
+		document.getElementById("c" + n).style.display = '';
+	}
+</script>
+<body class="g-bg" style="height: 100%">
+	<include file="Common:headtop" />
+	<include file="Common:head" />
+	<div id="categoryBody" class="category-viewport">
+		<div id="rootList" class="jd-category-tab">
+			<div style="overflow: hidden; height: 950px;" id="category8">
+				<ul style="transform: translateY(0px);" id="category7">
+					<li class="cur" id="m1"><a class="J_ping" href="javascript:gopage(1);">热门推荐</a></li>
+					<li id="m2"><a class="J_ping" href="javascript:gopage(2);">新鲜蔬菜</a></li>
+					<li id="m3"><a class="J_ping" href="javascript:gopage(3);">水产养殖</a></li>
+					<li id="m4"><a class="J_ping" href="javascript:gopage(4);">当季水果</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="jd-category-content">
+			<div id="c1" class="jd-category-content-wrapper">
+				<div id="branchList" style="transform: translateY(0px);">
+					<div class="jd-category-div cur" style="overflow: hidden; height: 950px; width: 234px;">
+						<ul class="jd-category-style-1">
+							<li><a class="J_ping"
+								report-eventparam="/products/0-44449999-655.html"
+								report-eventid="MCategory_Recommend" id="branch_38"
+								href="XXXXXXXXXXXXXXXXXXXXX.html"><img
+									src="//m.360buyimg.com/mobile/s100x100_jfs/t2782/149/1998822772/17899/b85cc0f3/57550c12Nba029c3e.png"
+									id="Imglazyload45"><span>TEST1</span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="c2" style="display:none" class="jd-category-content-wrapper">
+				<div id="branchList" style="transform: translateY(0px);">
+					<div class="jd-category-div cur" style="overflow: hidden; height: 950px; width: 234px;">
+						<ul class="jd-category-style-1">
+							<li><a class="J_ping"
+								report-eventparam="/products/0-44449999-655.html"
+								report-eventid="MCategory_Recommend" id="branch_38"
+								href="XXXXXXXXXXXXXXXXXXXXX.html"><img
+									src="//m.360buyimg.com/mobile/s100x100_jfs/t2782/149/1998822772/17899/b85cc0f3/57550c12Nba029c3e.png"
+									id="Imglazyload45"><span>TEST2</span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="c3" style="display:none" class="jd-category-content-wrapper">
+				<div id="branchList" style="transform: translateY(0px);">
+					<div class="jd-category-div cur" style="overflow: hidden; height: 950px; width: 234px;">
+						<ul class="jd-category-style-1">
+							<li><a class="J_ping"
+								report-eventparam="/products/0-44449999-655.html"
+								report-eventid="MCategory_Recommend" id="branch_38"
+								href="XXXXXXXXXXXXXXXXXXXXX.html"><img
+									src="//m.360buyimg.com/mobile/s100x100_jfs/t2782/149/1998822772/17899/b85cc0f3/57550c12Nba029c3e.png"
+									id="Imglazyload45"><span>TEST3</span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="c4" style="display:none" class="jd-category-content-wrapper">
+				<div id="branchList" style="transform: translateY(0px);">
+					<div class="jd-category-div cur" style="overflow: hidden; height: 950px; width: 234px;">
+						<ul class="jd-category-style-1">
+							<li><a class="J_ping"
+								report-eventparam="/products/0-44449999-655.html"
+								report-eventid="MCategory_Recommend" id="branch_38"
+								href="XXXXXXXXXXXXXXXXXXXXX.html"><img
+									src="//m.360buyimg.com/mobile/s100x100_jfs/t2782/149/1998822772/17899/b85cc0f3/57550c12Nba029c3e.png"
+									id="Imglazyload45"><span>TEST4</span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<include file="Common:foot"/>
+</body>
+</html>
