@@ -2,54 +2,118 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-transform "/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta content="telephone=no,email=no" name="format-detection">
 <title>新用户注册</title>
+<include file="Common:headtop" />
+<script type="text/javascript">
+$(function() {
+	$('#registerForm').validate({
+		onkeyup: false,
+		rules: {
+			userName: {
+				required: true,
+				rangelength: [3,15],
+				remote: {
+					url: "{:U('User/ajaxRegister')}",
+					type: "post",
+					dataType: "json",
+					data: {
+						userName: function() {
+							return $('#userName').val();
+						}
+					},
+					beforeSend: function() {
+						var _checking = $('#checkUser');
+						_checking.next('label').hide();
+						$(_checking).show();
+					},
+					complete: function() {
+						$('#checkUser').show();
+					}
+				}
+			},
+			password: {
+				required: true,
+				minlength: 6
+			},
+			confirmPassword: {
+				required: true,
+				equalTo: '#password'
+			},
+			securityQuestion: {
+				required: true
+			},
+			answer: {
+				required: true
+			},
+			agree: {
+				required: true
+			}
+		},
+		messages: {
+			userName: {
+				required: '用户名不能为空',
+				rangelength: '用户名必须在3-15个字符之间',
+				remote: '用户名已存在'
+			},
+			password: {
+				required: '密码不能为空',
+				minlength: '密码长度必须在6-20个字符之间'
+			},
+			confirmPassword: {
+				required: '密码需要再确认一遍',
+				equalTo: '两次密码不一致'
+			},
+			securityQuestion: {
+				required: '安全问题不能为空'
+			},
+			answer: {
+				required: '答案不能为空'
+			},
+			agree: {
+				required: '请先同意使用协议'
+			}
+		}
+	});
+});
+</script>
 </head>
 <body class="g-bg" style="height: 100%">
-<include file="Common:head" />
 	<div id="a-wrap" style="height: 100%">
-		<div class="altmsg" name="off">
-			<h4>注册成功</h4>
-		</div>
 		<section id="section" class="section"
-			style="position: relative; height: 100%; min-height: 470px">
-			<article id="article" class="article">
-				<div class="login-regist">
-					<div class="lr-header"></div>
-					<div class="lr-logo"></div>
-					<div class="dialog" style="display: none">
-						<div class="box tc" id="dialog_box_tc"></div>
-					</div>
-					<div class="tips-info">
-						已经有账号了? 点此<a href="{:U('User/login')}">登陆</a>
-					</div>
-					<div class="form-list p">
-						<ul>
-							<li class="fl-item"><b class="name"><input type="number"
-									id="mobile" class="input-style" placeholder="请输入用户名" /></b></li>
-							<li class="fl-item"><b class="name"><input
-									type="password" id="password" class="input-style"
-									placeholder="设置新密码（6-18位数字或字母）" /></b></li>
-							<li class="fl-item"><b class="name"><input
-									type="password" id="confirmPassword" class="input-style"
-									placeholder="再次输入密码" /></b></li>
-						</ul>
-					</div>
-					<div class="agree tc">
-						<input type="checkbox" id="agree" name="agree" checked="checked" />
-						<label for="agree"><a href="">同意使用协议<a></label>
-					</div>
-					<a href="javascript:;" id="btnRegister" class="login">注册</a> <br>
-				</div>
-				<div class="nav tc a-txt">
-					<br> <br>
-				</div>
-			</article>
-		</section>
-		<script src=""></script>
-	</div>
+				style="position: relative; height: 100%; min-height: 470px">
+				<article id="article" class="article">
+					<div class="login-regist">
+						<div class="lr-logo"></div>
+						<form id="registerForm" method="post" action="{:U('User/doRegister')}">
+							<div class="form-list p">
+							<ul>
+								<li class="fl-item"><b class="name"><input type="text"
+										id="userName" name="userName" class="input-style" placeholder="请输入用户名" /></b>
+									<label id="checkUser" class="input-style"></label>
+								</li>
+								<li class="fl-item"><b class="name"><input
+										type="password" id="password" name="password" class="input-style"
+										placeholder="设置新密码" /></b></li>
+								<li class="fl-item"><b class="name"><input
+										type="password" id="confirmPassword" name="confirmPassword" class="input-style"
+										placeholder="再次输入密码" /></b></li>
+								<li class="fl-item"><b class="name"><input type="text"
+										id="securityQuestion" name="securityQuestion" class="input-style"
+										placeholder="设置安全问题（用于找回密码）" /></b></li>
+								<li class="fl-item"><b class="name"><input type="text"
+										id="answer" name="answer" class="input-style" placeholder="答案" /></b></li>
+							</ul>
+							</div>
+							<div class="agree tc">
+								<input type="checkbox" id="agree" name="agree" checked="checked" />
+								<label for="agree">同意<a href="{:U('User/agreement')}">使用协议</a></label>
+							</div>
+							<!-- <a href="javascript:;" id="btnRegister" class="login">注册</a> <br> -->
+							<input type="submit" id="btnRegister" name="btnRegister" class="login" value="注册" style="margin:0px;width:100%;"/>
+							</form>
+						</div>
+					</article>
+			</section>
+		</div>
 </body>
 </html>

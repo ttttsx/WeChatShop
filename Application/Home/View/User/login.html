@@ -2,45 +2,83 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-transform "/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta content="telephone=no,email=no" name="format-detection">
 <title>用户登录</title>
+<include file="Common:headtop"/>
+<script type="text/javascript">
+$(function() {
+	$('#loginForm').validate({
+		errorPlacement: function(error, element) {
+			$(element).next("label").append(error);
+		},
+		success: function(label){
+			
+		},
+		onsubmit: true,
+		onkeyup:false,
+		rules: {
+			userName: {
+				required: true
+			},
+			password: {
+				required: true
+			}
+		},
+		messages: {
+			userName: {
+				required: '用户名不能为空'
+			},
+			password: {
+				required: '密码不能为空'
+			}
+		},
+		submitHandler: function(form) {
+			var userName = $('#userName').val();
+			var password = $('#password').val();
+			var url = "{:U('User/ajaxLogin')}";
+			$.post(url, {userName:userName,password:password}, function(data){
+				if(data.status==1) {
+					$('#loginText').html("<b>登录成功！</b>");
+					function a(){
+						location.href="{:U('Index/index')}"; // 登录成功跳转页面
+					}
+					setTimeout(a,1000);
+				} else {
+					$('#loginText').html("<i>密码错误！</i>");
+				}
+			},'json');
+		}
+	});
+});
+</script>
 </head>
 <body class="g-bg" style="height:100%">
-<include file="Common:head"/>
 <div id="a-wrap" style="height:100%">
-            
 <section id="section" class="section" style="position: relative;height: 100%;min-height:470px">
     <article id="article" class="article" >
         <div class="login-regist">
             <div class="lr-header"></div>
             <div class="lr-logo"></div>
-           <div class="dialog" style="display:none">
-                <div class="box tc" id="dialog_box_tc"></div>
-            </div>
+            <form id="loginForm" method="post">
             <div class="form-list p">
-                <input type='hidden' id='pagefrom' name='pagefrom' value=''/>
-                <input type='hidden' id='openId' name='openId' value=''/>
                 <ul>
-                    <li class="fl-item"><b class="name"><input type="text" id="userName" class="input-style" placeholder="用户名"/></b></li>
-                    <li class="fl-item"><b class="name"><input type="password" id="passWord" class="input-style" placeholder="请输入密码"/></b></li>
+                    <li class="fl-item"><b class="name"><input type="text" id="userName" name="userName" class="input-style" placeholder="用户名"/></b></li>
+                    <li class="fl-item"><b class="name"><input type="password" id="password" name="password" class="input-style" placeholder="请输入密码"/></b></li>
                 </ul>
             </div>
-            <a href="javascript:;"  id="btnLogin" class="login">登录</a>
+            <label id="loginText" style="margin:10px;"></label>
+            <input type="submit" id="btnLogin" name="btnLogin" class="login" value="登录" style="margin:0px;width:100%;"/>
+            </form>
         </div>
     </article>
 <footer class="" style="position:absolute;bottom:0px;width: 100%;">
     <div class="nav tc a-txt">
         <a href="{:U('register')}" class="a-txt">注册帐号</a>&nbsp&nbsp|&nbsp&nbsp
-        <a href="" class="a-txt">忘记密码</a>
+        <a href="{:U('findPassword')}" class="a-txt">忘记密码</a>
         <br>
         <br>
     </div>
 </footer>
 </section>
-<script src=""></script>
 </div>
 </body>
 </html>

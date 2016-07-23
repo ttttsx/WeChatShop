@@ -14,6 +14,31 @@
 	<include file="Common:head" />
 	<include file="Common:ad"/>
 	<include file="Common:intro" />
-	<include file="Common:foot" />
+	<footer class="footer fxb">
+		<nav class='nav'>
+			<a href="{:U('Index/index')}" class="item nav-home on">首页</a> <a
+				href="{:U('Index/classification')}" class="item nav-classify">分类</a>
+			<a href="{:U('Index/myCart')}" class="item nav-cart "><i
+				id="cartCount"></i>购物车</a> <a href="{:U('User/login')}"
+				class="item nav-mytony ">账户</a>
+		</nav>
+	</footer>
+	<script type="text/javascript">
+		var ctx = '';
+		// 查询购物车商品数量
+		$(function() {
+			$.ajax({
+				type : 'post',
+				url : ctx + '',
+				data : null,
+				success : function(result) {
+					if (result.error == '') {
+						// 修改购物车商品数量
+						$("#cartCount").html(result.itemtotalcnt);
+					}
+				}
+			});
+		});
+	</script>
 </body>
 </html>

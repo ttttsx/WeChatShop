@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>找回密码</title>
+<include file="Common:headtop"/>
+<script type="text/javascript">
+$(function() {
+		var list = {$question};
+		//document.getElementById("question").value = list['question'];
+		$('#question').html(list['question']);
+	$('#userForm').validate({
+		onkeyup: false,
+		onsubmit: true,
+		rules: {
+			answer: {
+				required: true
+			}
+		},
+		messages: {
+			answer: {
+				required: '答案不能为空'
+			}
+		},
+		submitHandler: function(form) {
+			var answer = $('#answer').val();
+			var url = "{:U('User/answerCheck')}";
+			$.post(url, {answer:answer, userName:list['userName']}, function(data){
+				if(data.status==1) {
+					location.href="{:U('User/resetPassword')}?userName="+list['userName'];
+				} else {
+					$('#Text').html("<i>答案错误</i>");
+				}
+			},'json');
+		}
+	});
+});
+</script>
+</head>
+<body class="g-bg" style="height:100%">
+<div id="a-wrap" style="height:100%">
+<section id="section" class="section" style="position: relative;height: 100%;min-height:470px">
+    <article id="article" class="article" >
+        <div class="login-regist">
+            <div class="lr-header"></div>
+            <div class="lr-logo"></div>
+            <form id="userForm" method="post">
+            <div class="form-list p">
+                <ul>
+                	<!-- <li class="fl-item"><b class="name"><input type="text" id="question" name="question" class="input-style" disabled="disabled"/></b></li> -->
+                	<li class="fl-item"><b class="name"><label id="question" class="input-style"></label></b></li>
+                    <li class="fl-item"><b class="name"><input type="text" id="answer" name="answer" class="input-style" placeholder="请输入答案"/></b></li>
+                </ul>
+            </div>
+            <label id="Text" style="margin:10px;color:red;"></label>
+            <input type="submit" id="btnContinue" name="btnContinue" class="login" value="继续" style="margin:0px;width:100%;"/>
+            </form>
+        </div>
+    </article>
+</section>
+</div>
+</body>
+</html>
