@@ -99,24 +99,20 @@
 		<nav class='nav'>
 			<a href="{:U('Index/index')}" class="item nav-home">首页</a> <a
 				href="{:U('Index/classification')}" class="item nav-classify on">分类</a>
-			<a href="{:U('Index/myCart')}" class="item nav-cart "><i
+			<a href="{:U('Cart/index')}" class="item nav-cart "><i
 				id="cartCount"></i>购物车</a> <a href="{:U('User/login')}"
-				class="item nav-mytony ">账户</a>
+				class="item nav-my ">账户</a>
 		</nav>
 	</footer>
 	<script type="text/javascript">
-	var ctx='';
 	// 查询购物车商品数量
 	$(function() {
 		$.ajax({
 			type : 'post',
-			url : ctx + '',
+			url : "{:U('Cart/ajaxGetCnt')}",
 			data : null,
 			success : function(result) {
-				if (result.error == '') {
-					// 修改购物车商品数量
-					$("#cartCount").html(result.itemtotalcnt);
-				}
+						$("#cartCount").html(result);
 			}
 		});
 	});

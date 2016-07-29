@@ -1876,8 +1876,8 @@ body {
 .header .nav .nav-classify::before,
 .footer .nav .nav-cart::before,
 .header .nav .nav-cart::before,
-.footer .nav .nav-mytony::before,
-.header .nav .nav-mytony::before,
+.footer .nav .nav-my::before,
+.header .nav .nav-my::before,
 .footer .nav .nav-delete::before,
 .header .nav .nav-delete::before,
 .footer .nav .nav-new::before,
@@ -1963,16 +1963,16 @@ body {
 .header .nav .nav-cart.on::before {
   background-position: -32px -64px;
 }
-.footer .nav .nav-mytony::before,
-.header .nav .nav-mytony::before {
+.footer .nav .nav-my::before,
+.header .nav .nav-my::before {
   background-position: 0 -96px;
 }
-.footer .nav .nav-mytony.on,
-.header .nav .nav-mytony.on {
+.footer .nav .nav-my.on,
+.header .nav .nav-my.on {
   color: #5ea626;
 }
-.footer .nav .nav-mytony.on::before,
-.header .nav .nav-mytony.on::before {
+.footer .nav .nav-my.on::before,
+.header .nav .nav-my.on::before {
   background-position: -32px -96px;
 }
 .footer .nav .nav-delete::before,
@@ -2492,7 +2492,7 @@ body {
   border: none;
   font-size: 14px;
 }
-.mytony {
+.my {
   overflow: hidden;
   width: 100%;
   height: 166.5px;
@@ -2501,7 +2501,7 @@ body {
   background-size: cover;
   background-position: center center;
 }
-.mytony .face {
+.my .face {
   margin-top: 30px;
   width: 80px;
   height: 80px;
@@ -2511,12 +2511,12 @@ body {
   overflow: hidden;
   border: 5px solid rgba(255, 255, 255, 0.5);
 }
-.mytony .face img {
+.my .face img {
   width: 100%;
   border-radius: 100px;
   overflow: hidden;
 }
-.mytony .name {
+.my .name {
   text-align: center;
   color: #fff;
   text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);

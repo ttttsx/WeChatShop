@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<include file="Common:headtop"/>
+<script type="text/javascript">
+function delAll() {
+	if (confirm("你确定要清空购物车？")) {
+		$.post("{:U('Cart/delAll')}",null, function(data){
+			alert(data.msg);
+			location.reload();
+		},'json');
+	} 
+}
+function addQuantity(recId) {
+	var item = $('#input_item_'+recId);
+	var orig = Number(item.val());
+	if(orig==1) {
+		$('#minus_'+recId).removeClass("minus_disabled");
+	}
+	item.attr('changed',orig);
+	item.val(orig+1);
+	item.keyup();
+}
+function decreaseQuantity(recId) {
+	var item = $('#input_item_'+recId);
+	var orig = Number(item.val());
+	if(orig>1) {
+		item.attr('changed',orig);
+		item.val(orig-1);
+		item.keyup();
+	} else {
+		$('#minus_'+recId).addClass("minus_disabled");
+	}
+}
+function changeQuantity(recId, input) {
+	// 获取总金额
+	var amountMoney = $('#amountMoney');
+	// 防止用户输入过快
+	var _v = input.value;
+	// 对输入的数值做验证
+	if(isNaN(input.value)||input.value<1) {
+		alert('请输入大于0的数字');
+		// 数值恢复
+		$(input).val($(input).attr('changed'));
+		return false;
+	}
+	
+	$.post("{:U('Cart/changeQuantity')}",{itemId:recId,quantity:_v}, function(data){
+		if(data.status==1) {
+			amountMoney.html("￥"+data.sumPrice);
+			$(input).attr('changed',_v);
+		} else {
+			alert(data.msg);
+			$(input).val($(input).attr('changed'));
+			return false;
+		}
+	},'json');
+}
+function dropItem(recId) {
+	// 获取总金额
+	var amountMoney = $('#amountMoney');
+	var itemSize = $('#itemSize');
+	
+	$.post("{:U('Cart/dropItem')}",{itemId:recId}, function(data){
+		if(data.status==1) {
+			amountMoney.html("￥"+data.sumPrice);
+			itemSize.html(data.itemSize);
+			location.reload();
+		} else {
+			alert("删除失败");
+			return false;
+		}
+	},'json');
+}
+function joinPay() {
+	if({$sumItems}==0) {
+		$('#join_pay').css("background","rgba(0,0,0,0.1)");
+		alert("请先添加商品！");
+	} else {
+		window.location.href="{:U('Index/index')}";
+	}
+}
+</script>
+<title>我的购物车</title>
+</head>
+<body class="g-bg" style="height:100%">
+<div id="a-wrap" style="overflow:hidden">
+	<section id="section" class="section">
+        <header id="header" class="header">
+            <nav class='nav bdb'>
+                <div class="note">购物车总共有: <b class="a-color" id="itemSize">{$sumItems}</b>件商品</div>
+                <div class="item nav-delete on" id="delAll" onclick="delAll();">清空购物车</div>
+            </nav>
+	    </header>
+        <article id="article" class="article">
+            <ul class="card-list" id="card-list">
+            <?php if(count($_SESSION['cart'])==0) { ?>
+            	<li class="card-item">
+				<div class="empty">
+                    <div class="pic">
+                        <i class="pic_icon pi_classify"></i>
+                    </div>
+                    <div class="txt">
+                        <p>您的购物车空空如也</p>
+                        <p><a href="{:U('Index/index')}">马上去逛逛</a></p>
+                    </div>
+                </div></li>
+                <?php } else {?>
+			    <volist name = "item" id ="vo">
+                <li class="card-item">
+					<div class="product-list list-product bd">
+						<div class="p-item">
+							<div class="item-wrap">
+								<a class="p-img" href=""><img src="{$vo.img}" alt=""></a>
+								<div class="p-cont">
+									<div class="ptit">
+										<div class="mtit">{$vo.name}
+										<div class=" item nav-delete" id="delBtn" onclick="dropItem({$vo.id})">删除</div>
+										</div>
+									</div>
+									<div class="pinfo">
+										<div class="price" style="margin-top:-10px;line-height:15px">¥{$vo.price}
+										<p style="margin-top:5px;"><font color="black" size="1px">小计：¥<?php echo sprintf("%01.2f",$vo['num']*$vo['price']);;?></font></p>
+										</div>
+										<div class="num num-control num-cart">
+										<span class="minus" id="minus_{$vo.id}" onclick="decreaseQuantity({$vo.id});"></span>
+										<input class="nums buyNum" id="input_item_{$vo.id}" type="number" value="{$vo.num}" orig="1" changed="{$vo.num}" onKeyUp="changeQuantity({$vo.id},this);" readonly="readonly">
+										<span class="plus" id="plus" onclick="addQuantity({$vo.id});"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>  
+		        </volist>
+            <?php } ?>   			
+            </ul>
+        </article>
+        <footer class="footer fxb">
+            <nav class='nav cart-footer'>
+                <div class="note">
+                <p></p>
+                <p style="margin:10px">总计 : <b class="a-color" id="amountMoney">¥{$sumPrice}</b></p>
+                </div>
+	            <a href="javascript:;" class="join-pay" onclick="joinPay();" id="join_pay">去结算</a>
+            </nav>
+        </footer>
+    </section>
+</div>
+</body>
+</html>
