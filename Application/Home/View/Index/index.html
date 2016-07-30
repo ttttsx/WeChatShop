@@ -2,11 +2,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-transform " />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta content="telephone=no,email=no" name="format-detection">
 <title>商城首页</title>
 </head>
 <body class="g-bg" style="height: 100%">
@@ -16,11 +11,10 @@
 	<include file="Common:intro" />
 	<footer class="footer fxb">
 		<nav class='nav'>
-			<a href="{:U('Index/index')}" class="item nav-home on">首页</a> <a
-				href="{:U('Index/classification')}" class="item nav-classify">分类</a>
-			<a href="{:U('Cart/index')}" class="item nav-cart "><i
-				id="cartCount"></i>购物车</a>
-			<a href="{:U('User/index')}" class="item nav-my ">账户</a>
+			<a href="{:U('Index/index')}" class="item nav-home on" id="navHome">首页</a>
+			<a href="{:U('Index/classification')}" class="item nav-classify" id="navClassify">分类</a>
+			<a href="{:U('Cart/index')}" class="item nav-cart " id="navCart"><i id="cartCount"></i>购物车</a>
+			<a href="{:U('User/index')}" class="item nav-my " id="navMy">账户</a>
 		</nav>
 	</footer>
 	<script type="text/javascript">

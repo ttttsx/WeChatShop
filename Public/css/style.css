@@ -3515,3 +3515,16 @@ body {
 	height: 282px;
 	display: block;
 }
+
+.drop {
+  display: block;
+  width: 24px ;
+  height: 24px;
+  margin: 0 auto;
+  background-image: url(../images/sprites.png);
+  -webkit-background-size: 120px;
+  background-size: 120px;
+  background-position: 0 -96px;
+  float:right;
+  margin-right:10px;
+}

@@ -2,9 +2,93 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<include file="Common:headtop"/>
 <title>Insert title here</title>
 </head>
-<body>
-User index.html
+<body class="g-bg" style="height: 100%">
+<div id="a-wrap" style="height:100%">
+	<h3 class="">
+		<p class=""><a href="">{$user['username']}</a></p>
+		<p class="login"><a href="{:U('User/address')}">收货地址管理</a></p>
+	</h3>
+	<ul class="">
+		<li style="width:25%;height:30px;float:left;"><a href="{:U('User/index',array('status'=>1))}">待付款</a></li>
+		<li style="width:25%;height:30px;float:left;"><a href="{:U('User/index',array('status'=>2))}">待发货</a></li>
+		<li style="width:25%;height:30px;float:left;"><a href="{:U('User/index',array('status'=>3))}">待收货</a></li>
+		<li style="width:25%;height:30px;float:left;"><a href="{:U('User/index',array('status'=>4))}">已完成</a></li>
+	</ul>
+	
+	<div class="">
+		<div class="">
+			<notempty name="orders">
+				<volist name="orders" id="vo">
+					<div class="">
+						<p class="">订单号:{$vo.orderid}</p>
+						<volist name="vo.items" id='item'>
+							<div class="">
+								<p class=""><a href=""><img src="__PUBLIC__/images/dot.png"></a></p>
+								<p class=""><a href="">{$item.productName}</a><br>
+									<span class=""></span></p>
+								<p class="">价格：<span>￥{$item.price}</span></p>
+								<p class="">数量：<span>{$item.quantity}</span></p>
+							</div>
+						</volist>
+						<div class=""></div>
+						<div class="">
+							<p class="">添加时间：{$vo.addtime|date='Y-m-d H:i:s',###}</p>
+							<div class="">
+								<div style="float:left;">订单总价：<b id="">￥{$vo.totalprice}&nbsp;&nbsp;</b>
+							</div>
+							<switch name="vo.status">
+								<case value="1"><!--待付款-->
+									<a href="{:U()}" id="" class="">付款</a>
+									<a href="{:U()}" id="" class="">取消订单</a>
+									<a href="{:U()}" id="" class="">查看订单</a>
+								</case>
+								<case value="2"><!-- 待发货 -->
+									<a href="{:U()}" id="" class="">查看订单</a>
+								</case>
+								<case value="3"><!-- 已发货 -->
+									<a href="{:U()}" id="" class="">确认收货</a>
+									<a href="{:U()}" id="" class="">查看订单</a>
+								</case>
+								<default />
+									<a href="{:U()}" id="" class="">查看订单</a>
+							</switch>
+						</div>
+					</div>
+				</volist>
+				<else />
+					<div class=""><span>没有符合条件的记录</span></div>
+			</notempty>
+			<div class="">
+				<div class=""></div>
+			</div>
+			<div class=""></div>
+		</div>
+		<div class=""></div>
+	</div>
+</div>
+<footer class="footer fxb">
+	<nav class='nav'>
+		<a href="{:U('Index/index')}" class="item nav-home" id="navHome">首页</a>
+		<a href="{:U('Index/classification')}" class="item nav-classify" id="navClassify">分类</a>
+		<a href="{:U('Cart/index')}" class="item nav-cart " id="navCart"><i id="cartCount"></i>购物车</a>
+		<a href="{:U('User/index')}" class="item nav-my on" id="navMy">账户</a>
+	</nav>
+</footer>
+<script type="text/javascript">
+	// 查询购物车商品数量
+	$(function() {
+		$.ajax({
+			type : 'post',
+			url : "{:U('Cart/ajaxGetCnt')}",
+			data : null,
+			success : function(result) {
+						$("#cartCount").html(result);
+			}
+		});
+	});
+</script>
 </body>
 </html>

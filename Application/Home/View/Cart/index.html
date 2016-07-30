@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <include file="Common:headtop"/>
+<title>我的购物车</title>
 <script type="text/javascript">
 function delAll() {
 	if (confirm("你确定要清空购物车？")) {
@@ -82,7 +83,6 @@ function joinPay() {
 	}
 }
 </script>
-<title>我的购物车</title>
 </head>
 <body class="g-bg" style="height:100%">
 <div id="a-wrap" style="overflow:hidden">
@@ -116,7 +116,7 @@ function joinPay() {
 								<div class="p-cont">
 									<div class="ptit">
 										<div class="mtit">{$vo.name}
-										<div class=" item nav-delete" id="delBtn" onclick="dropItem({$vo.id})">删除</div>
+										<div class="drop" id="delBtn" onclick="dropItem({$vo.id})"></div>
 										</div>
 									</div>
 									<div class="pinfo">

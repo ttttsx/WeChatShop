@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>修改收货地址</title>
+<include file="Common:headtop" />
+<script src="__PUBLIC__/js/PCASClass.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('#addAddressForm').validate({
+		onkeyup: false,
+		rules: {
+			recName: {
+				required: true
+			},
+			address: {
+				required: true
+			},
+			mobile: {
+				required: true
+			}
+		},
+		messages: {
+			recName: {
+				required: '收货人不能为空'
+			},
+			address: {
+				required: '地址不能为空'
+			},
+			mobile: {
+				required: '联系方式不能为空'
+			}
+		}
+	});
+});
+</script>
+</head>
+<body class="g-bg" style="height: 100%">
+	<div id="a-wrap" style="height: 100%">
+		<section id="section" class="section"
+				style="position: relative; height: 100%; min-height: 470px">
+				<article id="article" class="article">
+					<div class="login-regist">
+						<div class="lr-logo"></div>
+						<form id="addAddressForm" method="post" action="{:U('User/address',array('id'=>$info['id'],type=>'mod'))}">
+							<div class="form-list p">
+								<ul>
+									<li class="fl-item"><b class="name"><input type="text"
+											id="recName" name="recName" class="input-style" value="{$info['recname']}" /></b>
+									</li>
+									<li class="fl-item">
+										<select name="province" id="province" class="input-style"></select>
+										<select name="city" id="city" class="input-style"></select>
+										<select name="area" id="area" class="input-style"></select>
+										<script language="javascript">
+											new PCAS("province","city","area","{$info['province']}","{$info['city']}","{$info['area']}");
+										</script>
+									</li>
+									<li class="fl-item"><b class="name"><input
+											type="text" id="address" name="address" class="input-style"
+											value="{$info['address']}" /></b></li>
+									<li class="fl-item"><b class="name"><input
+											type="text" id="mobile" name="mobile" class="input-style"
+											value="{$info['mobile']}" /></b></li>
+								</ul>
+							</div>
+							<!-- <a href="javascript:;" id="btnRegister" class="login">注册</a> <br> -->
+							<label style="margin:10px;"></label>
+							<input type="submit" id="btnAdd" name="btnAdd" class="login" value="修改" style="margin:0px;width:100%;"/>
+							</form>
+						</div>
+					</article>
+			</section>
+		</div>
+</body>
+</html>

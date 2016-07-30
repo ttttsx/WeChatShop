@@ -39,7 +39,7 @@ $(function() {
 				if(data.status==1) {
 					$('#loginText').html("<b>登录成功！</b>");
 					function a(){
-						location.href="{:U('Index/index')}"; // 登录成功跳转页面
+						location.href="{:U('User/index')}"; // 登录成功跳转页面
 					}
 					setTimeout(a,1000);
 				} else {
