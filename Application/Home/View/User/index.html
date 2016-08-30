@@ -3,70 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <include file="Common:headtop"/>
-<title>Insert title here</title>
+<title>我的账户</title>
+<script type="text/javascript">
+function logOut() {
+	$.post("{:U('User/logOut')}",null,function(data){
+		if(data.status==1) {
+			alert("注销成功！请重新登录。");
+			location.reload();
+		}
+	},'json');
+}
+</script>
 </head>
 <body class="g-bg" style="height: 100%">
 <div id="a-wrap" style="height:100%">
-	<h3 class="">
-		<p class=""><a href="">{$user['username']}</a></p>
-		<p class="login"><a href="{:U('User/address')}">收货地址管理</a></p>
+	<h3 class="header">
+		<div class="ptit" style="height:30px;">
+		<div class="mtit" style="margin-left:10px;height:20px;margin-top:10px;width:50%;float:left;">{$user['username']},你好！</div>
+		<div class="mtit" style="float:right;margin-right:10px;margin-top:10px;" onclick="logOut();">注销</div>
+		</div>
+		<div class="login-regist"><a href="{:U('User/address')}" class=" login">收货地址管理</a></div>
 	</h3>
-	<ul class="">
-		<li style="width:25%;height:30px;float:left;"><a href="{:U('User/index',array('status'=>1))}">待付款</a></li>
-		<li style="width:25%;height:30px;float:left;"><a href="{:U('User/index',array('status'=>2))}">待发货</a></li>
-		<li style="width:25%;height:30px;float:left;"><a href="{:U('User/index',array('status'=>3))}">待收货</a></li>
-		<li style="width:25%;height:30px;float:left;"><a href="{:U('User/index',array('status'=>4))}">已完成</a></li>
-	</ul>
+	<div class="footer">
+		<nav class="nav">
+			<a class="item" style="height:30px;font-size:20px;<if condition='$status eq 1'>color:#5ea626;background-color:#EAEAEA;</if>" href="{:U('User/index',array('status'=>1))}">待付款 </a>
+			<a class="item" style="height:30px;font-size:20px;<if condition='$status eq 2'>color:#5ea626;background-color:#EAEAEA;</if>" href="{:U('User/index',array('status'=>2))}">待发货</a>
+			<a class="item" style="height:30px;font-size:20px;<if condition='$status eq 3'>color:#5ea626;background-color:#EAEAEA;</if>" href="{:U('User/index',array('status'=>3))}">待收货</a>
+			<a class="item" style="height:30px;font-size:20px;<if condition='$status eq 4'>color:#5ea626;background-color:#EAEAEA;</if>" href="{:U('User/index',array('status'=>4))}">已完成</a>
+		</nav>
+	</div>
 	
-	<div class="">
-		<div class="">
+	<div style="background-color:#EAEAEA;">
+	<div class="card-item">
+		<div class="product-list list-product bd">
 			<notempty name="orders">
 				<volist name="orders" id="vo">
-					<div class="">
-						<p class="">订单号:{$vo.orderid}</p>
+					<div class="p-item">
+					<div class="item-wrap" style="width:100%;">
+						<p class="ptit mtit">订单号:{$vo.orderid}</p>
 						<volist name="vo.items" id='item'>
-							<div class="">
-								<p class=""><a href=""><img src="__PUBLIC__/images/dot.png"></a></p>
-								<p class=""><a href="">{$item.productName}</a><br>
-									<span class=""></span></p>
-								<p class="">价格：<span>￥{$item.price}</span></p>
-								<p class="">数量：<span>{$item.quantity}</span></p>
+							<div class="card-list" id="card-list">
+								<div class="card-item" style="background-color:#F5F5F5;">
+									<div class="product-list list-product bd">
+										<div class="p-item">
+											<div class="item-wrap">
+												<a class="p-img" href=""><img src="http://pic3.nipic.com/20090622/2605630_113023052_2.jpg" style="height:80px;width:80px;"></a>
+												<div class="p-cont">
+													<div class="ptit">
+														<div class="mtit">{$item.productName}</div>
+													</div>
+													<div class="pinfo" style="height:65px;">
+														<div class="price nums buyNum" style="height:20px;font-size:10px;color:black;">价格：<span>￥{$item.price}</span></div>
+														<div class="price nums buyNum" style="height:20px;margin-top:10px;font-size:10px;color:black;">数量：<span>{$item.quantity}</span></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</volist>
-						<div class=""></div>
 						<div class="">
-							<p class="">添加时间：{$vo.addtime|date='Y-m-d H:i:s',###}</p>
-							<div class="">
-								<div style="float:left;">订单总价：<b id="">￥{$vo.totalprice}&nbsp;&nbsp;</b>
+							<div class="" style="margin-top:5px;">
+								<div class=""><small>添加时间：{$vo.addtime|date='Y-m-d H:i:s',###}</small></div>
+								<div class="">订单总价：<b id="" style="color:red;">￥{$vo.totalprice}&nbsp;&nbsp;</b></div>
 							</div>
-							<switch name="vo.status">
-								<case value="1"><!--待付款-->
-									<a href="{:U()}" id="" class="">付款</a>
-									<a href="{:U()}" id="" class="">取消订单</a>
-									<a href="{:U()}" id="" class="">查看订单</a>
-								</case>
-								<case value="2"><!-- 待发货 -->
-									<a href="{:U()}" id="" class="">查看订单</a>
-								</case>
-								<case value="3"><!-- 已发货 -->
-									<a href="{:U()}" id="" class="">确认收货</a>
-									<a href="{:U()}" id="" class="">查看订单</a>
-								</case>
-								<default />
-									<a href="{:U()}" id="" class="">查看订单</a>
-							</switch>
+							<div style="float:right;margin-right:10px;">
+								<switch name="vo.status">
+									<case value="1"><!--待付款-->
+										<a href="{:U()}" id="" class="orderop" style="width: 30px;">付款</a>
+										<a href="{:U()}" id="" class="orderop" style="width: 60px;">取消订单</a>
+										<a href="{:U()}" id="" class="orderop" style="width: 60px;">查看订单</a>
+									</case>
+									<case value="2"><!-- 待发货 -->
+										<a href="{:U()}" id="" class="orderop" style="width: 60px;">查看订单</a>
+									</case>
+									<case value="3"><!-- 已发货 -->
+										<a href="{:U()}" id="" class="orderop" style="width: 60px;">确认收货</a>
+										<a href="{:U()}" id="" class="orderop" style="width: 60px;">查看订单</a>
+									</case>
+									<default />
+										<a href="{:U()}" id="" class="orderop" style="width: 60px;">查看订单</a>
+								</switch>
+							</div>
 						</div>
 					</div>
 				</volist>
 				<else />
-					<div class=""><span>没有符合条件的记录</span></div>
+					<div class="" style="text-align:center;font-size:15px;"><span>没有符合条件的记录</span></div>
 			</notempty>
-			<div class="">
-				<div class=""></div>
 			</div>
-			<div class=""></div>
 		</div>
-		<div class=""></div>
 	</div>
 </div>
 <footer class="footer fxb">

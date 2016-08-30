@@ -31,10 +31,9 @@ class UserController extends Controller {
 				}
 			}
 			$this->assign('orders', $orders);
-			$this->assign('$status', $status);
+			$this->assign('status', $status);
 			$this->assign('user', $user);
 			//var_dump($orders);
-			
 			$this->display();
 		}
 	}
@@ -160,8 +159,7 @@ class UserController extends Controller {
 				$this->assign('msg',$msg);
 			}
 		}
-		
-		$addressList = $address->where(array('userid'=>$_SESSION['userInfo']['id']))->select();
+		$addressList = $address->where(array('userId'=>intval($_SESSION['userInfo']['id'])))->select();
 		$this->assign('addressList',$addressList);
 		$this->display();
 	}
@@ -200,6 +198,11 @@ class UserController extends Controller {
 		$this->assign('info',$info);
 		//var_dump($info);
 		$this->display();
+	}
+	public function logOut() {
+		session(null);
+		$data = array('status'=>1);
+		echo json_encode($data);
 	}
 }
 ?>

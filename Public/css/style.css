@@ -488,13 +488,9 @@ body {
   text-align: center;
 }
 .list-product .p-item .p-cont .pinfo .num.addcart {
-  width: 32px ;
+  width: 60px ;
   height: 32px;
   margin: 0 auto;
-  background-image: url(../images/sprites.png);
-  -webkit-background-size: 160px;
-  background-size: 160px;
-  background-position: -128px 0px;
 }
 .list-product .p-item .p-cont .pinfo .num.addorder {
   height: 25px;
@@ -3527,4 +3523,12 @@ body {
   background-position: 0 -96px;
   float:right;
   margin-right:10px;
+}
+/*用户主页付款按钮*/
+.orderop {
+  -webkit-appearance: button;
+  text-align: center;
+  background-color: #5ea626;
+  color: #fff;
+  border-radius: 15px;
 }

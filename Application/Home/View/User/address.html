@@ -5,24 +5,36 @@
 <title>收货地址管理</title>
 <include file="Common:headtop"/>
 </head>
-<body>
-<div id="">
-	<div class="">
-		<div class="" title="新增地址"><a class="" href="{:U('User/addAddress')}">新增地址</a></div>
-		<ul class="">
-		<volist name='addressList' id='vo'>
-			<li>
-				<p>{$vo.recname}({$vo.mobile})</p>
-				<p>{$vo.province}&nbsp;{$vo.city}&nbsp;{$vo.area}&nbsp;{$vo.address}</p>
-				<p class=""><br/></p>
-				<p class="">
-					<span class=""><a href="{:U('User/editAddress',array('id'=>$vo['id']))}"><i class=""></i>编辑</a></span>
-					<span class=""><a href="{:U('User/address',array('id'=>$vo['id'],'type'=>'del'))}" class=""><i class=""></i>删除</a></span>
-				</p>
-			</li>
-		</volist>
-		</ul>
-		<div class=""></div>
+<body class="g-bg" style="height: 100%">
+<div id="a-wrap" style="height:100%">
+	<h3 class="header">
+		<div class="login-regist"><a href="{:U('User/addAddress')}" class=" login">新增地址</a></div>
+	</h3>
+	<div style="background-color:#EAEAEA;">
+		<notempty name="addressList">
+			<ul style="width:100%;">
+			<volist name='addressList' id='vo'>
+				<div class="card-list" id="card-list" style="margin-top:10px;">
+					<div class="card-item" style="background-color:#F5F5F5;">
+						<div class="product-list list-product bd">
+							<div class="p-item">
+								<li style="width:100%;">
+									<p>{$vo.recname}({$vo.mobile})</p>
+									<p style="margin-top:5px;">{$vo.province}&nbsp;{$vo.city}&nbsp;{$vo.area}&nbsp;{$vo.address}</p>
+									<p class="" style="margin-top:5px;">
+										<a href="{:U('User/editAddress',array('id'=>$vo['id']))}" class="orderop" style="width: 30px;">编辑</a>
+										<a href="{:U('User/address',array('id'=>$vo['id'],'type'=>'del'))}" class="orderop" style="width: 30px;">删除</a>
+									</p>
+								</li>
+							</div>
+						</div>
+					</div>
+				</div>
+			</volist>
+			</ul>
+		<else />
+			<div class="" style="text-align:center;font-size:15px;"><span>没有已保存的收货地址</span></div>
+		</notempty>
 	</div>
 </div>
 </body>
